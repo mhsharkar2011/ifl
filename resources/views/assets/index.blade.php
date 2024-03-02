@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Categories') }}
+            {{ __('Assets') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -16,7 +16,19 @@
                                     SL No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Category
+                                    Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Model
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Processor
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Details
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Image
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -24,15 +36,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($assets as $asset)
                                 <tr
                                     class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $category->id }}
+                                        {{ $asset->id }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{ $category->name }}
+                                        {{ $asset->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $asset->model }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $asset->processor }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $asset->details }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $asset->image }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="#"

@@ -12,7 +12,8 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
+        $assets = Asset::all();
+        return view('assets.index',compact('assets'));
     }
 
     /**
@@ -20,7 +21,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        //
+        return view('assets.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asset = new Asset();
+        $asset->name = $request->input('name');
+        $asset->cat_name = $request->input('categories_id');
+        $asset->brand_name = $request->input('brand_id');
+        $asset->model = $request->input('model');
+        $asset->processor = $request->input('processor');
+        $asset->details = $request->input('details');
+        $asset->image = $request->input('image');
+        $asset->save();
+        return redirect()->route('assets.index')->with('status', 'Asset created successfully');
     }
 
     /**

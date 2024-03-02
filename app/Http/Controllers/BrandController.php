@@ -22,7 +22,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('brands.create');
     }
 
     /**
@@ -30,7 +30,10 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = new Brand();
+        $brand->name = $request->input('name');
+        $brand->save();
+        return redirect()->route('brands.index')->with('status', 'brand created successfully');
     }
 
     /**

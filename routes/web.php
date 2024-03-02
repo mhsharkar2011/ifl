@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Brand;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +22,20 @@ Route::get('/', function () {
 });
 
 
+// Category
+Route::get('categories',[CategoryController::class, 'index'])->name('categories.index');
+Route::get('categories/create',[CategoryController::class, 'create'])->name('categories.create');
+Route::post('categories/store',[CategoryController::class, 'store'])->name('categories.store');
 
-Route::get('category',[CategoryController::class, 'index'])->name('categories.index');
-Route::get('category/create',[CategoryController::class, 'create'])->name('category.create');
-Route::post('category/store',[CategoryController::class, 'store'])->name('category.store');
-// Route::get('brand',[BrandController::class, 'index']);
+// Brand
+Route::get('brands',[BrandController::class, 'index'])->name('brands.index');
+Route::get('brands/create',[BrandController::class, 'create'])->name('brands.create');
+Route::post('brands/store',[BrandController::class, 'store'])->name('brands.store');
+
+// Assets
+Route::get('assets',[AssetController::class, 'index'])->name('assets.index');
+Route::get('assets/create',[AssetController::class, 'create'])->name('assets.create');
+Route::post('assets/store',[AssetController::class, 'store'])->name('assets.store');
 
 
 
