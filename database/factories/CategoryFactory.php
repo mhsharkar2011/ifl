@@ -16,8 +16,24 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            //
-        ];
+        // $owners = User::where('role','Owner')->get();
+        // $vehicle_types = VehicleType::all();
+                return [
+                    'name' => $this->faker->unique()->randomElement([
+                        "Desktop",
+                        "Laptop",
+                        "Component",
+                        "Monitor",
+                        "UPS",
+                        "Office Equipment",
+                        "Camera",
+                        "Networking",
+                        "Software",
+                        "Server & Storage",
+                        "Accessories",
+                        "TV",
+                        "Appliance",
+                    ]),
+                ];
     }
 }
