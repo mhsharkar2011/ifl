@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('category',[CategoryController::class, 'index'])->name('categories.index');
+Route::get('category/create',[CategoryController::class, 'create'])->name('category.create');
+Route::post('category/store',[CategoryController::class, 'store'])->name('category.store');
+// Route::get('brand',[BrandController::class, 'index']);
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
