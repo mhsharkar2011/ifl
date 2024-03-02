@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index',compact('categories'));
+        return view('categories.index',['categories' => $categories]);
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->input('name');
         $category->save();
-        return redirect()->route('category.index')->with('status', 'Category created successfully');
+        return redirect()->route('categories.index')->with('status', 'Category created successfully');
     }
 
     /**
