@@ -13,7 +13,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::all();
-        return view('brands.index',compact('brands'));
+        return view('brands.index',['brands' => $brands]);
 
     }
 
@@ -22,7 +22,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('brands.create');
     }
 
     /**
@@ -30,7 +30,10 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = new Brand();
+        $brand->name = $request->input('name');
+        $brand->save();
+        return redirect()->route('brands.index')->with('status', 'brand created successfully');
     }
 
     /**
@@ -46,7 +49,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('brands.edit', compact('brand'));
     }
 
     /**
@@ -54,7 +57,15 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $brand->update([
+        'name' => $request->name,
+    ]);
+
+    return redirect()->route('brands.index')->with('success', 'Brand updated successfully!');
     }
 
     /**

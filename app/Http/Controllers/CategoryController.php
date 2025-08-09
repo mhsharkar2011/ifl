@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index',['categories' => $categories]);
+        return view('categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        
+
         return view('categories.create');
     }
 
@@ -49,16 +49,26 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Category $category)
-    {
-        //
-    }
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $category->update([
+        'name' => $request->name,
+    ]);
+
+    return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
+}
+
 
     /**
      * Remove the specified resource from storage.

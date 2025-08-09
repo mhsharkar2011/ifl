@@ -23,11 +23,22 @@ Route::get('/', function () {
 });
 
 
+// Category------------------------------------------------------------------------------------------------
+Route::get('/categories',[CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/create',[CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories/store',[CategoryController::class, 'store'])->name('categories.store');
+Route::get('/categories/{category}/edit',[CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{category}',[CategoryController::class, 'update'])->name('categories.update');
+// Category End----------------------------------------------------------------------------------------------
 
-Route::get('category',[CategoryController::class, 'index'])->name('categories.index');
-Route::get('category/create',[CategoryController::class, 'create'])->name('category.create');
-Route::post('category/store',[CategoryController::class, 'store'])->name('category.store');
-// Route::get('brand',[BrandController::class, 'index']);
+// Brands----------------------------------------------------------------------------------------------------
+ Route::get('/brands',[BrandController::class, 'index'])->name('brands.index');
+ Route::get('/brands/create',[BrandController::class, 'create'])->name('brands.create');
+ Route::post('/brands/store',[BrandController::class, 'store'])->name('brands.store');
+ Route::get('/brands/{brand}/edit',[BrandController::class, 'edit'])->name('brands.edit');
+ Route::put('/brands/{brand}',[BrandController::class, 'update'])->name('brands.update');
+
+//Brand End------------------------------------------------------------------------------------------------
 
 
 
