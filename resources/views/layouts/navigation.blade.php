@@ -22,6 +22,12 @@
                         {{ __('Category') }}
                     </x-nav-link>
                 </div>
+                 {{--Sub  Category Nav --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('subCategories.index')" :active="request()->routeIs('subCategories.index')">
+                        {{ __('Sub Category') }}
+                    </x-nav-link>
+                </div>
                 {{-- Brands Nav --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('brands.index')" :active="request()->routeIs('brands.index')">

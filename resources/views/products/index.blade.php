@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category') }}
+            <a href="{{ route('products.create') }}"
+                                            class="font-medium text-blue-300 dark:text-blue-500 hover:underline">Add Product</a>
         </h2>
     </x-slot>
     <div class="py-12">
@@ -30,7 +31,7 @@
                                 <th scope="col" class="px-6 py-3">
                                     Rate
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th  colspan="3" scope="col" class="px-6 py-3 text-center">
                                     Action
                                 </th>
                             </tr>
@@ -62,9 +63,17 @@
                                     <td class="px-6 py-4">
                                         {{ $product->price }}
                                     </td>
+                                     <td class="px-6 py-4">
+                                        <a href="{{ route('products.show', $product) }}"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('products.edit', $product) }}"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Edit</a>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <a href="{{ route('products.destroy', $product) }}"
+                                            class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

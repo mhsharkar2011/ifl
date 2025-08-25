@@ -1,31 +1,109 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Brand Create') }}
+            {{ __('Product Create') }}
         </h2>
+
     </x-slot>
-<!-- Appointment Start -->
-    <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row gx-5">
-                <div class="col-lg-12">
-                    <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-                        <h1 class="text-white mb-4">Create Brand</h1>
-                        <form action="{{ route('products.store') }}" method="POST">
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <x-guest-layout>
+                        <form method="POST" action="{{ route('products.store') }}">
                             @csrf
-                        <div class="row g-3">
-                                <div class="col">
-                                    <input type="text" name="name" class="form-control bg-light border-0" style="height: 55px;" placeholder="Enter Brand Name Here..">
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-dark w-100 py-3" type="submit">Create</button>
-                                </div>
+
+                            <!-- Product Name -->
+                            <div>
+                                <x-input-label for="name" :value="__('Product Name')" />
+                                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
+                                    :value="old('name')" required autofocus autocomplete="name" />
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            </div>
+
+                            <!-- Category -->
+                            <div class="mt-4">
+                                <x-input-label for="category_id" :value="__('Category')" />
+                                <select id="category_id" name="category_id"
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+                            </div>
+
+                            <!-- Sub Category -->
+                            <div class="mt-4">
+                                <x-input-label for="sub_category_id" :value="__('Sub Category')" />
+                                <select id="sub_category_id" name="sub_category_id"
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                                    @foreach ($subCategories as $subCategory)
+                                        <option value="{{ $subCategory->id }}"
+                                            {{ old('sub_category_id') == $subCategory->id ? 'selected' : '' }}>
+                                            {{ $subCategory->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('sub_category_id')" class="mt-2" />
+                            </div>
+
+                            <!-- Brand -->
+                            <div class="mt-4">
+                                <x-input-label for="brand_id" :value="__('Brand')" />
+                                <select id="brand_id" name="brand_id"
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}"
+                                            {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                            {{ $brand->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('brand_id')" class="mt-2" />
+                            </div>
+
+                            <!-- Unit -->
+                             <div class="mt-4">
+                                <x-input-label for="unit_id" :value="__('Unit')" />
+                                <select id="unit_id" name="unit_id"
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                                    @foreach ($units as $unit)
+                                        <option value="{{ $unit->id }}"
+                                            {{ old('unit_id') == $unit->id ? 'selected' : '' }}>
+                                            {{ $unit->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('brand_id')" class="mt-2" />
+                            </div>
+
+
+                            <!-- Price -->
+                            <div class="mt-4">
+                                <x-input-label for="price" :value="__('Price')" />
+                                <x-text-input id="price" class="block mt-1 w-full" type="number" step="0.01"
+                                    name="price" :value="old('price')" required />
+                                <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                            </div>
+
+
+                            <div class="flex items-center justify-center mt-4">
+                                <x-primary-button class="ms-4">
+                                    {{ __('Save Data') }}
+                                </x-primary-button>
                             </div>
                         </form>
-                    </div>
+                    </x-guest-layout>
+
+
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- Appointment End -->
 </x-app-layout>

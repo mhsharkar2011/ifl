@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,10 @@ Route::post('/categories/store', [CategoryController::class, 'store'])->name('ca
 Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 // Category End----------------------------------------------------------------------------------------------
+
+// Sub Category------------------------------------------------------------------------------------------------
+Route::resource('subCategories', SubCategoryController::class);
+// Sub Category End----------------------------------------------------------------------------------------------
 
 // Brands----------------------------------------------------------------------------------------------------
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');

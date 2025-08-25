@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category') }}
+            <a href="{{ route('subCategories.create') }}"
+                class="font-medium text-blue-300 dark:text-blue-500 hover:underline">Add Sub Category</a>
         </h2>
     </x-slot>
     <div class="py-12">
@@ -14,6 +15,9 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     SL No
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Category
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Sub Category
@@ -31,11 +35,18 @@
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $subCategory->id }}
                                     </th>
+                                    
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $subCategory->Category->name }}
+                                    </th>
+
+
                                     <td class="px-6 py-4">
                                         {{ $subCategory->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('categories.edit', $category) }}"
+                                        <a href="{{ route('subCategories.edit', $subCategory) }}"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                     </td>
                                 </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -21,8 +22,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-
-        return view('categories.create');
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        return view('categories.create', compact('categories', 'subCategories'));
     }
 
     /**
@@ -30,10 +32,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->input('name');
-        $category->save();
-        return redirect()->route('categories.index')->with('status', 'Category created successfully');
+         $request->validate([
+             'name' => 'required|string|max:255',
+            'sub_category_id' => 'required|exists:sub_categories,id',
+        ]);
+
+        Category::create($request->all());
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
