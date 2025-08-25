@@ -16,7 +16,19 @@
                                     SL No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Category Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Sub Category Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Units
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Products
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Rate
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -31,8 +43,24 @@
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->id }}
                                     </th>
-                                    <td class="px-6 py-4">
+                                     <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $product->Category->name }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $product->SubCategory->name }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $product->Unit->name }}
+                                    </th>
+                                     <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->name }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $product->price }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="{{ route('products.edit', $product) }}"
