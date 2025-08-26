@@ -68,8 +68,22 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(subCategory $subCategory)
     {
-        //
+          {
+         if ($subCategory->products()->count() > 0) {
+        return redirect()->route('subCategories.index')
+            ->with('error', 'Cannot delete subCategory with existing products.');
+    }
+
+        try {
+            $subCategory->delete();   // delete the subCategory
+
+            return redirect()->route('subCategories.index')->with('success', 'subCategory deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('subCategories.index')
+                ->with('error', 'Failed to delete subCategory: ' . $e->getMessage());
+        }
+    }
     }
 }

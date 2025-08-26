@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <a href="{{ route('products.create') }}"
-                                            class="font-medium text-blue-300 dark:text-blue-500 hover:underline">Add Product</a>
+                class="font-medium text-blue-300 dark:text-blue-500 hover:underline">Add Product</a>
         </h2>
     </x-slot>
     <div class="py-12">
@@ -17,6 +17,12 @@
                                     SL No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Item Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Item Description
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Category Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -26,13 +32,13 @@
                                     Units
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Products
-                                </th>
-                                <th scope="col" class="px-6 py-3">
                                     Rate
                                 </th>
-                                <th  colspan="3" scope="col" class="px-6 py-3 text-center">
+                                <th scope="col" class="px-6 py-3 text-center">
                                     Action
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Status
                                 </th>
                             </tr>
                         </thead>
@@ -44,7 +50,15 @@
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->id }}
                                     </th>
-                                     <th scope="row"
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $product->name }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $product->description }}
+                                    </th>
+                                    <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->Category->name }}
                                     </th>
@@ -56,25 +70,48 @@
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->Unit->name }}
                                     </th>
-                                     <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $product->name }}
-                                    </th>
+
                                     <td class="px-6 py-4">
                                         {{ $product->price }}
                                     </td>
-                                     <td class="px-6 py-4">
-                                        <a href="{{ route('products.show', $product) }}"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                                    </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('products.edit', $product) }}"
-                                            class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Edit</a>
+                                        <div class="flex space-x-2">
+                                            <!-- View -->
+                                            <a href="{{ route('products.show', $product) }}"
+                                                class="flex items-center justify-center transition">
+                                                <span class="material-icons text-base">visibility</span>
+                                            </a>
+
+                                            <!-- Edit -->
+                                            <a href="{{ route('products.edit', $product) }}">
+                                                <span class="material-icons text-base">edit</span>
+                                            </a>
+
+                                            <!-- Delete -->
+                                            <form action="{{ route('products.destroy', $product) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit">
+                                                    <span class="material-icons text-base">delete</span>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
+
+
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('products.destroy', $product) }}"
-                                            class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                        @if ($product->discontinued)
+                                            <span class="px-2 py-1 rounded-full text-red-700 text-sm font-semibold">
+                                                Discontinued
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 rounded-full text-green-700 text-sm font-semibold">
+                                                Running
+                                            </span>
+                                        @endif
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

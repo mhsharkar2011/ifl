@@ -21,22 +21,6 @@
                                     :value="old('name')" required autofocus autocomplete="name" />
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
-
-                            <!-- Sub Category -->
-                            <div class="mt-4">
-                                <x-input-label for="sub_category_id" :value="__('Sub Category')" />
-                                <select id="sub_category_id" name="sub_category_id"
-                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
-                                    @foreach ($subCategories as $subCategory)
-                                        <option value="{{ $subCategory->id }}"
-                                            {{ old('sub_category_id') == $subCategory->id ? 'selected' : '' }}>
-                                            {{ $subCategory->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <x-input-error :messages="$errors->get('sub_category_id')" class="mt-2" />
-                            </div>
-
                             <div class="flex items-center justify-center mt-4">
                                 <x-primary-button class="ms-4">
                                     {{ __('Save Data') }}

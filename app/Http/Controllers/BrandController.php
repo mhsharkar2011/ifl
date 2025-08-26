@@ -73,6 +73,20 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+          {
+         if ($brand->products()->count() > 0) {
+        return redirect()->route('brands.index')
+            ->with('error', 'Cannot delete brand with existing products.');
+    }
+
+        try {
+            $brand->delete();   // delete the brand
+
+            return redirect()->route('brands.index')->with('success', 'brand deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('brands.index')
+                ->with('error', 'Failed to delete brand: ' . $e->getMessage());
+        }
+    }
     }
 }

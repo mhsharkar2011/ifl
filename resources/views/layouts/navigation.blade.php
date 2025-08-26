@@ -22,7 +22,7 @@
                         {{ __('Category') }}
                     </x-nav-link>
                 </div>
-                 {{--Sub  Category Nav --}}
+                {{-- Sub  Category Nav --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('subCategories.index')" :active="request()->routeIs('subCategories.index')">
                         {{ __('Sub Category') }}
@@ -34,6 +34,14 @@
                         {{ __('Brands') }}
                     </x-nav-link>
                 </div>
+
+                {{-- Unit Nav --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
+                        {{ __('Units') }}
+                    </x-nav-link>
+                </div>
+                {{-- Products Nav --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
                         {{ __('Products') }}

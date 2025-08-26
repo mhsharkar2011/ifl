@@ -31,7 +31,6 @@ class ProductController extends Controller
         $units = Unit::all();
 
         return view('products.create', compact('categories', 'subCategories', 'brands', 'units'));
-
     }
 
     /**
@@ -66,24 +65,50 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'discontinued' => 'boolean',
+            'price' => 'required|string|max:255',
+        ]);
+
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'discontinued' => $request->discontinued ?? 0, // fallback to false
+            'price' => $request->price,
+        ]);
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        if ($product->products()->count() > 0) {
+            return redirect()->route('categories.index')
+                ->with('error', 'Cannot delete product with existing products.');
+        }
+
+        try {
+            $product->delete();   // delete the product
+
+            return redirect()->route('categories.index')->with('success', 'product deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('categories.index')
+                ->with('error', 'Failed to delete product: ' . $e->getMessage());
+        }
     }
 }

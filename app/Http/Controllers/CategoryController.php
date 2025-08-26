@@ -23,8 +23,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $subCategories = SubCategory::all();
-        return view('categories.create', compact('categories', 'subCategories'));
+        return view('categories.create', compact('categories'));
     }
 
     /**
@@ -32,9 +31,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-             'name' => 'required|string|max:255',
-            'sub_category_id' => 'required|exists:sub_categories,id',
+        $request->validate([
+            'name' => 'required|string|max:255',
         ]);
 
         Category::create($request->all());
@@ -62,17 +60,17 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Category $category)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
 
-    $category->update([
-        'name' => $request->name,
-    ]);
+        $category->update([
+            'name' => $request->name,
+        ]);
 
-    return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
-}
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
+    }
 
 
     /**
@@ -80,6 +78,18 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+         if ($category->products()->count() > 0) {
+        return redirect()->route('categories.index')
+            ->with('error', 'Cannot delete category with existing products.');
+    }
+    
+        try {
+            $category->delete();   // delete the category
+
+            return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('categories.index')
+                ->with('error', 'Failed to delete category: ' . $e->getMessage());
+        }
     }
 }

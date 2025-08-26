@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <a href="{{ route('categories.create') }}"
-                class="font-medium text-blue-300 dark:text-blue-500 hover:underline">Add Category</a>
+            <a href="{{ route('units.create') }}"
+                class="font-medium text-blue-300 dark:text-blue-500 hover:underline">Add Unit</a>
         </h2>
     </x-slot>
     <div class="py-12">
@@ -17,7 +17,7 @@
                                     SL No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Category
+                                    Unit
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -25,23 +25,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $category->id }}
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        {{ $category->name }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                         <!-- Edit Button -->
-                                        <a href="{{ route('categories.edit', $category) }}"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            @foreach ($units as $unit )
 
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;"
+
+                            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $unit->id }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $unit ->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="{{ route('units.edit', $unit) }}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+
+                                         <!-- Delete Button -->
+                                        <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline-block;"
                                             onsubmit="return confirm('Are you sure you want to delete this category?');">
                                             @csrf
                                             @method('DELETE')
@@ -49,14 +49,14 @@
                                                 Delete
                                             </button>
                                         </form>
-                                        
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
+

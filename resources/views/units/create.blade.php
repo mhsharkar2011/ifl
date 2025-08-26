@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Brand Create') }}
+            {{ __('Unit Create') }}
         </h2>
 
     </x-slot>
@@ -11,12 +11,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <x-guest-layout>
-                        <form method="POST" action="{{ route('brands.store') }}">
+                        <form method="POST" action="{{ route('units.store') }}">
                             @csrf
 
                             <!-- Brand Name -->
                             <div>
-                                <x-input-label for="name" :value="__('Brand Name')" />
+                                <x-input-label for="name" :value="__('Unit Name')" />
                                 <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
                                     :value="old('name')" required autofocus autocomplete="name" />
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
