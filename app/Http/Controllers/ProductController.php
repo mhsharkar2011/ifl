@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category', 'subCategory', 'brand', 'unit')->get();
         return view('products.index', ['products' => $products]);
     }
 
@@ -84,7 +84,7 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $request->description ?? 0, // fallback to empty string
             'discontinued' => $request->discontinued ?? 0, // fallback to false
             'price' => $request->price,
         ]);
@@ -97,17 +97,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if ($product->products()->count() > 0) {
-            return redirect()->route('categories.index')
-                ->with('error', 'Cannot delete product with existing products.');
-        }
-
         try {
+            if (! $product->discontinued) {
+            return redirect()->route('products.index')
+                ->with('error', 'Only discontinued products can be deleted.');
+        }
             $product->delete();   // delete the product
-
-            return redirect()->route('categories.index')->with('success', 'product deleted successfully.');
+            return redirect()->route('products.index')->with('success', 'product deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('categories.index')
+            return redirect()->route('products.index')
                 ->with('error', 'Failed to delete product: ' . $e->getMessage());
         }
     }
