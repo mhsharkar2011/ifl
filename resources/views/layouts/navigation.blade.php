@@ -16,30 +16,52 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                {{-- Category Nav --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                        {{ __('Category') }}
-                    </x-nav-link>
-                </div>
-                {{-- Sub  Category Nav --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('subCategories.index')" :active="request()->routeIs('subCategories.index')">
-                        {{ __('Sub Category') }}
-                    </x-nav-link>
-                </div>
-                {{-- Brands Nav --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('brands.index')" :active="request()->routeIs('brands.index')">
-                        {{ __('Brands') }}
-                    </x-nav-link>
-                </div>
 
-                {{-- Unit Nav --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
-                        {{ __('Units') }}
-                    </x-nav-link>
+                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                <div>{{ __('Master') }}</div>
+                                <div class="ms-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            {{-- Category Nav --}}
+                            <x-dropdown-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                                {{ __('Category') }}
+                            </x-dropdown-link>
+                            {{-- Sub  Category Nav --}}
+                            <x-dropdown-link :href="route('subCategories.index')" :active="request()->routeIs('subCategories.index')">
+                               {{ __('Sub Category') }}
+                            </x-dropdown-link>
+
+                            {{-- Location Nav --}}
+                            <x-dropdown-link :href="route('locations.index')" :active="request()->routeIs('locations.index')">
+                                {{ __('Location') }}
+                            </x-dropdown-link>
+                             {{-- Branch Nav --}}
+                            <x-dropdown-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
+                                {{ __('Branch') }}
+                            </x-dropdown-link>
+
+                             {{-- Brands Nav --}}
+                             <x-dropdown-link :href="route('brands.index')" :active="request()->routeIs('brands.index')">
+                                {{ __('Brands') }}
+                            </x-dropdown-link>
+                            {{-- Unit Nav --}}
+                            <x-dropdown-link :href="route('units.index')" :active="request()->routeIs('units.index')">
+                                {{ __('Units') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
                 </div>
                 {{-- Products Nav --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
@@ -37,6 +39,12 @@ Route::resource('categories', CategoryController::class);
 // Sub Category----------------------------------------------------------------------------------------------
 Route::resource('subCategories', SubCategoryController::class);
 // Sub Category End------------------------------------------------------------------------------------------
+// Location--------------------------------------------------------------------------------------------------
+Route::resource('locations', LocationController::class);
+// Location End---------------------------------------------------------------------------------------------
+// Branch---------------------------------------------------------------------------------------------------
+Route::resource('branches', BranchController::class);
+// Branch End-----------------------------------------------------------------------------------------------
 
 // Brands----------------------------------------------------------------------------------------------------
 Route::resource('brands', BrandController::class);
@@ -58,11 +66,6 @@ Route::resource('units', UnitController::class);
 
 // Products---------------------------------------------------------------------------------------------------
 Route::resource('products', ProductController::class);
-// Route::get('/products', [BrandController::class, 'index'])->name('products.index');
-// Route::get('/products/create', [BrandController::class, 'create'])->name('products.create');
-// Route::post('/products/store', [BrandController::class, 'store'])->name('products.store');
-// Route::get('/products/{brand}/edit', [BrandController::class, 'edit'])->name('products.edit');
-// Route::put('/products/{brand}', [BrandController::class, 'update'])->name('products.update');
 
 //Products End------------------------------------------------------------------------------------------------
 

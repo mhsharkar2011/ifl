@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->text('description')->nullable();
-            $table->boolean('discontinued')->default(false);
-            $table->softDeletes();
+            $table->boolean('discontinued')->default('0'); // 0=available, 1=discontinued
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
