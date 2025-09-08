@@ -1,28 +1,28 @@
 <x-app-layout>
     <x-slot name="header">
-     <nav class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-14 items-center">
-                <!-- Left side -->
-                <div class="flex space-x-6">
-                    <a href="{{ route('products.create') }}"
-                       class="text-gray-500 dark:text-gray-200 hover:text-blue-300 font-medium">
-                        Add Product
-                    </a>
-                </div>
+        <nav class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-14 items-center">
+                    <!-- Left side -->
+                    <div class="flex space-x-6">
+                        <a href="{{ route('products.create') }}"
+                            class="text-gray-500 dark:text-gray-200 hover:text-blue-300 font-medium">
+                            Add Product
+                        </a>
+                    </div>
 
-                <!-- Right side (optional, like user profile/logout) -->
-                <div class="flex space-x-4">
-                    <a href="{{ route('products.create') }}"
-                       class="text-gray-500 dark:text-gray-200 hover:text-blue-300 font-medium">
-                        Product Assign
-                    </a>
+                    <!-- Right side (optional, like user profile/logout) -->
+                    <div class="flex space-x-4">
+                        <a href="{{ route('products.create') }}"
+                            class="text-gray-500 dark:text-gray-200 hover:text-blue-300 font-medium">
+                            Product Assign
+                        </a>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</x-slot>
+        </nav>
+    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -58,6 +58,9 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center">
                                     Status
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Updated At
                                 </th>
                             </tr>
                         </thead>
@@ -117,8 +120,6 @@
                                             </form>
                                         </div>
                                     </td>
-
-
                                     <td class="px-6 py-4">
                                         @if ($product->discontinued)
                                             <span class="px-2 py-1 rounded-full text-red-700 text-sm font-semibold">
@@ -129,6 +130,10 @@
                                                 Running
                                             </span>
                                         @endif
+                                    </td>
+                                     <td class="px-6 py-4">
+                                        {{ $product->updated_at->diffForHumans() }} ({{ $product->updated_at->format('Y-m-d H:i:s') }})
+
                                     </td>
 
                                 </tr>
